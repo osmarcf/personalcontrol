@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Personal Control</title>
+</head>
+
+<body class="bg-dark text-white">
+    <div class="container">
+        <h1>Personal Control</h1>
+        <h2 th:text="${'Nome cliente: '+ ordemdeservico.nome}"></h2>
+        <h2 th:text="${'E-mail: ' + ordemdeservico.email}"></h2>
+        <h2 th:text="${'Telefone: '+ ordemdeservico.telefone}"></h2>
+        <h2 th:text="${'Descrição do Serviço: ' + ordemdeservico.descservico}"></h2>
+        <a class="btn btn-primary" href="/buscaros">Voltar</a>
+    </div>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
