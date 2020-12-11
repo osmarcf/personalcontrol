@@ -2,16 +2,23 @@ package com.preferencebrasil.personalcontrol.utils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import com.preferencebrasil.personalcontrol.model.Cliente;
 import com.preferencebrasil.personalcontrol.model.OrdemDeServico;
+import com.preferencebrasil.personalcontrol.model.Role;
+import com.preferencebrasil.personalcontrol.model.User;
 import com.preferencebrasil.personalcontrol.repository.ClienteRepository;
 import com.preferencebrasil.personalcontrol.repository.OrdemDeServicoRepository;
+import com.preferencebrasil.personalcontrol.repository.RoleRepository;
+import com.preferencebrasil.personalcontrol.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,6 +29,36 @@ public class DummyData {
 
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @PostConstruct
+    public void saveUser() {
+        Role role = new Role();
+        role.setId(1);
+        role.setRole("ADMIN");
+        roleRepository.save(role);
+
+        Set<Role> roles = new HashSet<Role>();
+        roles.add(role);
+
+        User user = new User();
+        user.setActive(true);
+        user.setName("name");
+        user.setUserName("username");
+        user.setLastName("lastname");
+        user.setEmail("email@email.com");
+        user.setPassword(bCryptPasswordEncoder.encode("12345"));
+        user.setRoles(roles);
+        userRepository.save(user);
+    }
 
     //@PostConstruct
     public void saveClientes(){
