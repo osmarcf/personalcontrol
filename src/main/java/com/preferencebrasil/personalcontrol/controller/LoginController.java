@@ -24,7 +24,7 @@ public class LoginController {
     }
 
 
-    @GetMapping(value={"/login"})
+    @GetMapping(value={"/sistema/home"})
     public ModelAndView getLogin(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
